@@ -1,5 +1,12 @@
 # Spotify Clone
 
+* User authentication
+* Spotify API
+* Material ui
+* React Context API
+* Hooks and state
+* Using firebase
+
 ## Available Scripts
 **In the project directory, you can run:**
 ### `yarn start`
