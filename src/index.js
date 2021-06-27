@@ -2,8 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Styles/index.css';
 import App from './App';
+import { DataLayer } from './DataLayer'
+import reducer, { initialState } from './reducer';
+
 
 ReactDOM.render(
-    <App />,
+  <React.StrictMode>
+    <DataLayer initialState={initialState} reducer={reducer}>
+      <App />
+    </DataLayer>
+  </React.StrictMode>,
   document.getElementById('root')
 );
