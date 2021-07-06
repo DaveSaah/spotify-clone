@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import Login from './Components/Login';
 import Player from './Components/Player';
@@ -11,10 +11,8 @@ let spotify = new SpotifyWebApi()
 
 function App() {
 
-  const [token, setToken] = useState('')
-
   // Grabing data from a data layer
-  const [{ user }, dispatch] = useDataLayerValue()
+  const [{ token }, dispatch] = useDataLayerValue()
 
   //Runs each time the page refreshes or there is a change in dependent values
   useEffect(() => {
@@ -23,27 +21,46 @@ function App() {
     const _token = hash.access_token
 
     if (_token) {
-      setToken(_token)
-
+      //adding token to Datalayer
+      dispatch({
+        type: 'SET_TOKEN',
+        token: _token,
+      })
       //setting the access token for the spotify API
       spotify.setAccessToken(_token)
-      spotify.getMe().then(user => {
+
+      spotify.getMe().then(_user => {
         // dispatch add data to the data layer
         dispatch({
           type: 'SET_USER',
-          user: user
+          user: _user,
         })
       })
-    }
-  }, [])
 
-  console.log('User data', user)
+      spotify.getPlaylist('37i9dQZEVXcSc6zfT6fh1J').then(response => 
+          dispatch({
+            type: 'SET_DISCOVER_WEEKLY',
+            discover_weekly: response,
+          })
+        )
+
+      spotify.getUserPlaylists().then(playlists => {
+        dispatch({
+          type: 'SET_PLAYLISTS',
+          playlists: playlists,
+        })
+      })
+
+    }
+  }, [dispatch])
+
+  // console.log('User data:', user)
 
   return (
     <div className="app">
       {/* if logged in successfully render Player component else render Login component */}
       {
-        token ? <Player user={user} /> : <Login />
+        token ? <Player spotify={spotify} /> : <Login />
       }
     </div>
   );
