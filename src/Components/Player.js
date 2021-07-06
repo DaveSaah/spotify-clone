@@ -1,10 +1,18 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
+import '../Styles/Player.css'
+import Sidebar from './Sidebar'
+import Body from './Body'
+import Footer from './Footer'
 
-function Player(props) {
+
+function Player({ spotify }) {
     return (
-        <div>
-            <Typography variant='h5' align='center' >Welcome To Spotify Clone, {props.user.display_name}</Typography>
+        <div className='player'>
+            <div className='player__body'>
+                <Sidebar />
+                <Body spotify={spotify} />
+            </div>
+            <Footer />
         </div>
     )
 }
