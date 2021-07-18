@@ -44,6 +44,18 @@ function App() {
           })
         )
 
+      spotify.getMyTopArtists().then((response) => 
+          dispatch({
+            type: 'SET_TOP_ARTISTS',
+            top_artists: response,
+          })
+      )
+
+      dispatch({
+        type: 'SET_SPOTIFY',
+        spotify: spotify,
+      })
+
       spotify.getUserPlaylists().then(playlists => {
         dispatch({
           type: 'SET_PLAYLISTS',

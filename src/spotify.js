@@ -1,10 +1,8 @@
 export const authEndPoint = 'https://accounts.spotify.com/authorize'
-//const redirectUri = 'http://localhost:3000/'
-const redirectUri = 'https://spotify-clone-ep.web.app'
+const redirectUri = 'http://localhost:3000/'
+// const redirectUri = 'https://spotify-clone-ep.web.app'
 const clientId = '977caab9cac640b9b21998352a0498bf'
 
-//playlist-read-private
-//playlist-read-collaborative
 
 const scopes = [
     "user-read-currently-playing",
@@ -12,6 +10,8 @@ const scopes = [
     "user-read-playback-state",
     "user-top-read",
     "user-modify-playback-state",
+    "playlist-read-private",
+    "playlist-read-collaborative",
 ]
 
 // ? adds parameter to a web address
@@ -23,12 +23,12 @@ export const loginUrl = `${authEndPoint}?client_id=${clientId}&redirect_uri=${re
 
 export const getTokenFromUrl = () => {
     return window.location.hash
-    .substring(1)
-    .split('&')
-    .reduce((initial, item) => {
-        let parts = item.split('=')
-        initial[parts[0]] = decodeURIComponent(parts[1])
+        .substring(1)
+        .split('&')
+        .reduce((initial, item) => {
+            let parts = item.split('=')
+            initial[parts[0]] = decodeURIComponent(parts[1])
 
-        return initial
-    }, {})
+            return initial
+        }, {})
 }

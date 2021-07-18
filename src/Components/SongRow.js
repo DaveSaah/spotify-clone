@@ -11,7 +11,7 @@ function SongRow({ track }) {
             <div className="songRow__info">
                 <Typography variant='body1'>{track.name}</Typography>
                 <Typography vaiant='body2' className='T_p'>
-                    {track.artists.map((artist) => artist.name).join(', ')} &nbsp;
+                    {track.artists.map((artist) => artist.name).join(', ')} -{" "} &nbsp;
                     {track.album.name}
                 </Typography>
             </div>
