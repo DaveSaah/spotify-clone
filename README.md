@@ -7,6 +7,8 @@
 * Hooks and state
 * Using firebase
 
+[Click here to see demo](https://spotify-clone-ep.web.app)
+
 ## Available Scripts
 **In the project directory, you can run:**
 ### `yarn start`
